@@ -27,6 +27,22 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+passport.serializeUser((user, done) => {
+  done(null, user._id);
+});
+
+passport.deserializeUser((id, done) => {
+  // db.collection("users").findOne(
+  //   {
+  //     _id: new ObjectID(id),
+  //   },
+  //   (err, doc) => {
+  //     done(null, doc);
+  //   }
+  // );
+  done(null, null);
+});
+
 app.set("view engine", "pug");
 
 app.route("/").get((req, res) => {
