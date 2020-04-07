@@ -8,14 +8,18 @@
   "description": "What am I about?",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "dependencies": {
     "body-parser": "^1.16.0",
     "cors": "^2.8.1",
+    "dotenv": "^8.2.0",
     "express": "^4.14.1",
+    "express-session": "^1.17.0",
     "helmet": "^3.4.0",
     "mongodb": "^2.2.22",
+    "passport": "^0.4.1",
     "pug": "^2.0.4"
   },
   "repository": {
@@ -27,5 +31,8 @@
     "hyperdev",
     "express"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
 }
