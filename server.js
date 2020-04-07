@@ -16,7 +16,10 @@ app.set("view engine", "pug");
 
 app.route("/").get((req, res) => {
   // res.sendFile(process.cwd() + "/views/index.html");
-  res.render(process.cwd() + "/views/pug/index");
+  res.render(process.cwd() + "/views/pug/index", {
+    title: "Hello",
+    message: "Please login",
+  });
 });
 
 app.listen(process.env.PORT || 3000, () => {
