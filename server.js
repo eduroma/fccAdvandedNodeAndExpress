@@ -95,7 +95,7 @@ mongo.connect(process.env.DATABASE, (err, cluster) => {
             if (err) {
               next(err);
             } else if (user) {
-              res.redirect("/");
+              res.redirect("/login");
             } else {
               db.collection("users").insertOne(
                 {
