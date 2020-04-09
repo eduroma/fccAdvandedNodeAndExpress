@@ -50,16 +50,16 @@ app
     }
   );
 
-app.route("/profile").get(ensureAuthenticated, (req, res) => {
-  res.render(process.cwd() + "/views/pug/profile");
-});
-
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
   return res.redirect("/");
 }
+
+app.route("/profile").get(ensureAuthenticated, (req, res) => {
+  res.render(process.cwd() + "/views/pug/profile");
+});
 
 mongo.connect(process.env.DATABASE, (err, cluster) => {
   if (err) {
