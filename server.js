@@ -50,6 +50,17 @@ app
     }
   );
 
+app.route("/profile").get(ensureAuthenticated, (req, res) => {
+  res.render(process.cwd() + "/views/pug/profile");
+});
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  return res.redirect("/");
+}
+
 mongo.connect(process.env.DATABASE, (err, cluster) => {
   if (err) {
     console.log("Database error: " + err);
