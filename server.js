@@ -125,7 +125,9 @@ mongo.connect(process.env.DATABASE, (err, cluster) => {
       .post(
         passport.authenticate("local", { failureRedirect: "/" }),
         (req, res) => {
-          res.render(process.cwd() + "/views/pug/profile");
+          res.render(process.cwd() + "/views/pug/profile", {
+            username: req.user.username,
+          });
         }
       );
 
