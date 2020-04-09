@@ -37,14 +37,26 @@ app.route("/").get((req, res) => {
   res.render(process.cwd() + "/views/pug/index", {
     title: "Hello",
     message: "Please login",
+    showLogin: true,
   });
 });
 
-mongo.connect(process.env.DATABASE, (err, db) => {
+app
+  .route("/login")
+  .post(
+    passport.authenticate("local", { failureRedirect: "/" }),
+    (req, res) => {
+      res.render(process.cwd() + "/views/pug/profile");
+    }
+  );
+
+mongo.connect(process.env.DATABASE, (err, cluster) => {
   if (err) {
     console.log("Database error: " + err);
   } else {
     console.log("Successful database connection");
+
+    const db = cluster.db("fccauth");
 
     passport.use(
       new LocalStrategy(function (username, password, done) {
