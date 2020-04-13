@@ -9,7 +9,7 @@ const LocalStrategy = require("passport-local");
 const session = require("express-session");
 const mongo = require("mongodb").MongoClient;
 const ObjectID = require("mongodb").ObjectID;
-const bcyrpt = require("bcryptjs");
+const bcyrpt = require("bcrypt");
 
 const app = express();
 
