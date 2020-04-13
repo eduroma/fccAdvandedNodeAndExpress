@@ -9,6 +9,7 @@ const LocalStrategy = require("passport-local");
 const session = require("express-session");
 const mongo = require("mongodb").MongoClient;
 const ObjectID = require("mongodb").ObjectID;
+const bcyrpt = require("bcryptjs");
 
 const app = express();
 
@@ -53,7 +54,7 @@ mongo.connect(process.env.DATABASE, (err, cluster) => {
           if (!user) {
             return done(null, false);
           }
-          if (password !== user.password) {
+          if (!bcyrpt.compareSync(password, user.password)) {
             return done(null, false);
           }
           return done(null, user);
@@ -89,6 +90,8 @@ mongo.connect(process.env.DATABASE, (err, cluster) => {
 
     app.route("/register").post(
       (req, res, next) => {
+        const hash = bcyrpt.hashSync(req.body.password);
+
         db.collection("users").findOne(
           { username: req.body.username },
           function (err, user) {
@@ -100,7 +103,7 @@ mongo.connect(process.env.DATABASE, (err, cluster) => {
               db.collection("users").insertOne(
                 {
                   username: req.body.username,
-                  password: req.body.password,
+                  password: hash,
                 },
                 (err, doc) => {
                   if (err) {

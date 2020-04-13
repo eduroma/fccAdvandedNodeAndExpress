@@ -12,6 +12,7 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.16.0",
     "cors": "^2.8.1",
     "dotenv": "^8.2.0",
